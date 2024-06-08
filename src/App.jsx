@@ -11,6 +11,7 @@ const App = () => {
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [phase, setPhase] = useState("playing");
   const [direction, setDirection] = useState(1);
+  const [chosenColor, setChosenColor] = useState(null);
 
   useEffect(() => {
     startNewGame();
@@ -42,7 +43,6 @@ const App = () => {
     setCurrentPlayer((currentPlayer + 1) % players.length);
   };
 
-
   const startNewGame = () => {
     const shuffledDeck = shuffleDeck(initialDeck);
     const newPlayers = [[], [], [], []];
@@ -64,7 +64,6 @@ const App = () => {
     const drawnCard = newDeck.pop();
     const newPlayers = [...players];
     newPlayers[playerIndex].push(drawnCard);
-    
     setDeck(newDeck);
     setPlayers(newPlayers);
     saveGameState();
@@ -99,7 +98,8 @@ const App = () => {
     return (
       cardColor === currentCardColor ||
       cardValue === currentCardValue ||
-      card[0] === "W"
+      card[0] === "W" ||
+      cardColor === chosenColor
     );
   };
 
@@ -120,16 +120,14 @@ const App = () => {
         setCurrentPlayer((currentPlayer + direction + 4) % 4);
         break;
       case "W":
-        // Implement wild card logic (e.g., change color)
-        handleWildCard = (color) => {
-          setCurrentCard(color + currentCard.slice(1));
-          setCurrentPlayer((currentPlayer + direction + 4) % 4);
-        };
+        // Wild card logic
+        const chosenColor = prompt("Choose a color: R, G, B, Y");
+        setChosenColor(chosenColor);
+        setCurrentPlayer((currentPlayer + direction + 4) % 4);
+        break;
       case "SP":
         setPhase("spinning");
-
         break;
-
       default:
         setCurrentPlayer((currentPlayer + direction + 4) % 4);
     }
@@ -156,12 +154,19 @@ const App = () => {
         break;
       case "Swap Hands":
         // Implement swap hands logic
+        const nextPlayer = (currentPlayer + direction + 4) % 4;
+        const tempHand = players[currentPlayer];
+        const newPlayers = [...players];
+        newPlayers[currentPlayer] = newPlayers[nextPlayer];
+        newPlayers[nextPlayer] = tempHand;
+        setPlayers(newPlayers);
         break;
       case "Play Again":
         // Implement play again logic
         break;
       case "Wild Card":
-        // Implement wild card logic
+        const chosenColor = prompt("Choose a color: R, G, B, Y");
+        setChosenColor(chosenColor);
         break;
       default:
         break;
@@ -171,40 +176,78 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <h1 className="text-4xl font-bold mb-4">UNO Spin Game</h1>
-
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-        onClick={startNewGame}
-      >
-        Start New Game
-      </button>
-      {phase === "spinning" && <SpinWheel onSpinResult={handleSpinResult} />}
-      <Deck deck={deck} />
-      <div className="current-card">
-        <h2 className="text-2xl font-bold mb-2">Current Card</h2>
-        <div className="card">{currentCard}</div>
+    <div className="container">
+      <div className="App flex flex-col">
+        <div className="container mx-auto p-20 m-2">
+          {phase !== "spinning" && (
+            <>
+              <Deck deck={deck} />
+              <div className="current-card">
+                <h2 className="text-2xl font-bold">Current Card</h2>
+                <div className={`central ${currentCard}`}>{currentCard}</div>
+              </div>
+              <h2 className="text-xl font-bold mb-2">Current Active Player</h2>
+              <div className="text-3xl font-bold active-player">
+                {currentPlayer + 1}
+              </div>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={endTurn}
+              >
+                End Turn
+              </button>
+              <button
+                className="bg-black ml-2 hover:bg-gray-200 text-blue-500 font-bold py-2 px-4 rounded"
+                onClick={startNewGame}
+              >
+                Start New Game
+              </button>
+            </>
+          )}
+          {phase === "spinning" ? (
+            <SpinWheel onSpinResult={handleSpinResult} />
+          ) : (
+            <div className="players">
+              <div className="absolute inset-x-0 top-0 flex items-center justify-center">
+                <PlayerHand
+                  playerIndex={0}
+                  cards={players[0]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(0)}
+                  playCard={(cardIndex) => playCard(0, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 flex justify-center">
+                <PlayerHand
+                  playerIndex={1}
+                  cards={players[1]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(1)}
+                  playCard={(cardIndex) => playCard(1, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-y-0 left-0 flex items-center justify-center transform rotate-90">
+                <PlayerHand
+                  playerIndex={2}
+                  cards={players[2]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(2)}
+                  playCard={(cardIndex) => playCard(2, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center justify-center transform -rotate-90">
+                <PlayerHand
+                  playerIndex={3}
+                  cards={players[3]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(3)}
+                  playCard={(cardIndex) => playCard(3, cardIndex)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-      <h2 className="text-xl font-bold mb-2">Current Active Player</h2>
-      <div className="text-3xl font-bold active-player">
-        {currentPlayer + 1}
-      </div>
-      <div className="players">
-        {players.map((playerHand, index) => (
-          <PlayerHand
-            key={index}
-            playerIndex={index}
-            cards={playerHand}
-            currentPlayer={currentPlayer}
-            drawCard={() => drawCard(index)}
-            playCard={(cardIndex) => playCard(index, cardIndex)}
-          />
-        ))}
-      </div>
-      <button onClick={endTurn}>End Turn</button>
-      
-    
     </div>
   );
 };

@@ -1,149 +1,179 @@
 /* General App styling */
 .App {
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
+  text-align: center;
+  font-family: Arial, sans-serif;
   
-  .deck, .current-card, .players, .spin-wheel {
-    margin: 20px;
-  }
-  
-  /* Card styling */
-  .card {
-    display: inline-block;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 8px;
-    border: 2px solid #000;
-    cursor: pointer;
-    width: 50px;
-    height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  
-  /* Color-specific card styling */
-  .card.R1, .card.R2, .card.R3, .card.R4, .card.R5, .card.R6, .card.R7, .card.R8, .card.R9, .card.R0, .card.RS, .card.RD, .card.RW {
-    background-color: red;
-    color: white;
-  }
-  
-  .card.G1, .card.G2, .card.G3, .card.G4, .card.G5, .card.G6, .card.G7, .card.G8, .card.G9, .card.G0, .card.GS, .card.GD, .card.GW {
-    background-color: green;
-    color: white;
-  }
-  
-  .card.B1, .card.B2, .card.B3, .card.B4, .card.B5, .card.B6, .card.B7, .card.B8, .card.B9, .card.B0, .card.BS, .card.BD, .card.BW {
-    background-color: blue;
-    color: white;
-  }
-  
-  .card.Y1, .card.Y2, .card.Y3, .card.Y4, .card.Y5, .card.Y6, .card.Y7, .card.Y8, .card.Y9, .card.Y0, .card.YS, .card.YD, .card.YW {
-    background-color: yellow;
-    color: black;
-  }
-  .card.YSP {
-    background-image: url('path/to/your/YSP/image');
-  }
-  
-  .card.RSP {
-    background-image: url('path/to/your/RSP/image');
-  }
-  
-  .card.GSP {
-    background-image: url('path/to/your/GSP/image');
-  }
-  
-  .card.BSP {
-    background-image: url('path/to/your/BSP/image');
-  }
-  
-  /* Player hand styling */
-  .player-hand {
-    border: 1px solid #000;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .player-hand.current {
-    background-color: #f0f0f0;
-  }
-  
-  /* Spin Wheel styling */
-  .spin-wheel {
-    border: 2px solid #000;
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    position: relative;
-  }
-  
-  .spin-wheel button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .spin-wheel p {
-    margin-top: 20px;
-    font-size: 1.2em;
-  }
-  
-  /* Current card styling */
-  .current-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .current-card .card {
-    font-size: 1.5em;
-    width: 60px;
-    height: 90px;
-  }
-  
-  .deck h2, .current-card h2, .spin-wheel h2 {
-    font-size: 1.5em;
-  }
-  
-  .deck div {
-    font-size: 1.2em;
-  }
-  
-  .players {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
+}
 
-  /* App.css */
+.deck, .current-card, .players, .spin-wheel {
+  margin: 20px;
+}
 
+
+/* Card styling */
+.card {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  cursor: pointer;
+  width: 50px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.central {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  cursor: pointer;
+  width: 125px;
+  height: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Color-specific card styling */
+.card.R1, .card.R2, .card.R3, .card.R4, .card.R5, .card.R6, .card.R7, .card.R8, .card.R9, .card.R0, .card.RS, .card.RD, .card.RW, .card.RSP {
+  background-color: red;
+  color: white;
+}
+
+.card.G1, .card.G2, .card.G3, .card.G4, .card.G5, .card.G6, .card.G7, .card.G8, .card.G9, .card.G0, .card.GS, .card.GD, .card.GW, .card.GSP {
+  background-color: green;
+  color: white;
+}
+
+.card.B1, .card.B2, .card.B3, .card.B4, .card.B5, .card.B6, .card.B7, .card.B8, .card.B9, .card.B0, .card.BS, .card.BD, .card.BW, .card.BSP {
+  background-color: blue;
+  color: white;
+}
+
+.card.Y1, .card.Y2, .card.Y3, .card.Y4, .card.Y5, .card.Y6, .card.Y7, .card.Y8, .card.Y9, .card.Y0, .card.YS, .card.YD, .card.YW, .card.YSP {
+  background-color: yellow;
+  color: black;
+}
+
+/* Color-specific card styling */
+.central.R1, .central.R2, .central.R3, .central.R4, .central.R5, .central.R6, .central.R7, .central.R8, .central.R9, .central.R0, .central.RS, .central.RD, .central.RW, .central.RSP {
+  background-color: red;
+  color: white;
+}
+
+.central.G1, .central.G2, .central.G3, .central.G4, .central.G5, .central.G6, .central.G7, .central.G8, .central.G9, .central.G0, .central.GS, .central.GD, .central.GW, .central.GSP {
+  background-color: green;
+  color: white;
+}
+
+.central.B1, .central.B2, .central.B3, .central.B4, .central.B5, .central.B6, .central.B7, .central.B8, .central.B9, .central.B0, .central.BS, .central.BD, .central.BW, .central.BSP {
+  background-color: blue;
+  color: white;
+}
+
+.central.Y1, .central.Y2, .central.Y3, .central.Y4, .central.Y5, .central.Y6, .central.Y7, .central.Y8, .central.Y9, .central.Y0, .central.YS, .central.YD, .central.YW, .central.YSP {
+  background-color: yellow;
+  color: black;
+}
+
+/* Player hand styling */
+.player-hand {
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+.player-hand.current {
+  background-color: #f0f0f0;
+}
+
+/* Spin Wheel styling */
+.spin-wheel {
+  border: 2px solid #000;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
+}
+
+.spin-wheel button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+}
+
+.spin-wheel p {
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+/* Current card styling */
+.current-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.current-card .card {
+  font-size: 1.5em;
+  width: 60px;
+  height: 90px;
+}
+
+.deck h2, .current-card h2, .spin-wheel h2 {
+  font-size: 1.5em;
+}
+
+.deck div {
+  font-size: 1.2em;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+/* Button styling */
 button {
-    padding: 10px 20px;
-    margin: 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  padding: 10px 20px;
+  margin: 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
