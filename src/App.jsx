@@ -188,15 +188,25 @@ const App = () => {
         <div className="container mx-auto  m-2">
           {phase !== "spinning" && (
             <>
-              <div className="current-card">
-                <div className={`central ${currentCard}`}></div>
+              <div className="current-card flex">
+                
+                <div className={`central ${currentCard}`}>
+                  
+                </div>
+                <button
+                  className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={startNewGame}
+                >
+                  New Game
+                </button>
+                <button className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={endTurn} >
+                  End Turn
+                </button>
+                
               </div>
-              {/* <h2 className="text-xl font-bold mb-2">Current Active Player</h2>
-              <div className="text-3xl font-bold active-player">
-                {currentPlayer + 1}
-              </div> */}
             </>
           )}
+
           {phase === "spinning" ? (
             <SpinWheel onSpinResult={handleSpinResult} />
           ) : (
@@ -215,6 +225,19 @@ const App = () => {
               )}
             </div>
           )}
+          {phase !== "spinning" && (
+            <>
+              <div className="hidden-deck3">
+                <h1></h1>
+              </div>
+              <div className="hidden-deck2">
+                <h1></h1>
+              </div>
+              <div className="hidden-deck1">
+                <h1></h1>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -231,22 +254,26 @@ const PlayerHand = ({
   playCard,
 }) => {
   return (
-    <div
-      className={`player-hand ${currentPlayer === playerIndex ? "active" : ""}`}
-    >
-      <h3>Player {playerIndex + 1}</h3>
-      <div className="cards">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className={`card ${card}`}
-            onClick={() => playCard(index)}
-          ></div>
-        ))}
+    <>
+      <div
+        className={`player-hand ${
+          currentPlayer === playerIndex ? "active" : ""
+        } absolute inset-x-0 bottom-0 `}
+      >
+        <h3>Player {playerIndex + 1}</h3>
+        <div className="cards ">
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className={`card ${card}`}
+              onClick={() => playCard(index)}
+            ></div>
+          ))}
+        </div>
+        {currentPlayer === playerIndex && (
+          <button onClick={drawCard}>Draw Card</button>
+        )}
       </div>
-      {currentPlayer === playerIndex && (
-        <button onClick={drawCard}>Draw Card</button>
-      )}
-    </div>
+    </>
   );
 };

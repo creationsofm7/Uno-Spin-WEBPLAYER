@@ -2,11 +2,9 @@
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
-  background-image: url('./assets/bg.png');
+  background-image: url("./assets/bg.png");
   background-size: cover;
   height: 100vh;
-  
-  
 }
 
 .central {
@@ -15,10 +13,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px auto;
-  position: relative;
-
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
+.hidden-deck1 {
+  background-image: url("./assets/card-group.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  top: 25%;
+  left: -2%;
+}
+
+.hidden-deck2 {
+ 
+
+  background-image: url("./assets/card-group.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  rotate: -180deg;
+  top: 25%;
+ 
+  right: 0%;
+  
+}
+
+.hidden-deck3 {
+  background-image: url("./assets/card-group.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  rotate: 90deg;
+  margin: 0;
+  padding: 0;
+  top: 0%;
+  top: -15%;
+  left: 40%;
+  
+}
+
 
 .card {
   width: 112px;
@@ -30,44 +77,32 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-
-  
-
 }
 
 .cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-
 }
 
-
 .spinner {
-  background-image: url('./assets/wheel.png');
+  background-image: url("./assets/wheel.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  
 }
-
-
-
-
 
 /* Current card styling */
 
-
-
-.deck h2, .current-card h2, .spin-wheel h2 {
+.deck h2,
+.current-card h2,
+.spin-wheel h2 {
   font-size: 1.5em;
 }
 
 .deck div {
   font-size: 1.2em;
 }
-
-
 
 /* Button styling */
 button {
@@ -85,470 +120,452 @@ button:hover {
   background-color: #0056b3;
 }
 
-
-
-
 /* Color-specific card styling */
 /* Color-specific card styling with background images for number cards */
 .card.R1 {
-  background-image: url('./assets/R1.png');
+  background-image: url("./assets/R1.png");
 }
 
 .card.R2 {
-  background-image: url('./assets/R2.png');
+  background-image: url("./assets/R2.png");
 }
 
 .card.R3 {
-  background-image: url('./assets/R3.png');
+  background-image: url("./assets/R3.png");
 }
 
 .card.R4 {
-  background-image: url('./assets/R4.png');
+  background-image: url("./assets/R4.png");
 }
 
 .card.R5 {
-  background-image: url('./assets/R5.png');
+  background-image: url("./assets/R5.png");
 }
 
 .card.R6 {
-  background-image: url('./assets/R6.png');
+  background-image: url("./assets/R6.png");
 }
 
 .card.R7 {
-  background-image: url('./assets/R7.png');
+  background-image: url("./assets/R7.png");
 }
 
 .card.R8 {
-  background-image: url('./assets/R8.png');
+  background-image: url("./assets/R8.png");
 }
 
 .card.R9 {
-  background-image: url('./assets/R9.png');
+  background-image: url("./assets/R9.png");
 }
 
 .card.R0 {
-  background-image: url('./assets/R0.png');
+  background-image: url("./assets/R0.png");
 }
 
 .card.G1 {
-  background-image: url('./assets/G1.png');
+  background-image: url("./assets/G1.png");
 }
 
 .card.G2 {
-  background-image: url('./assets/G2.png');
+  background-image: url("./assets/G2.png");
 }
 
 .card.G3 {
-  background-image: url('./assets/G3.png');
+  background-image: url("./assets/G3.png");
 }
 
 .card.G4 {
-  background-image: url('./assets/G4.png');
+  background-image: url("./assets/G4.png");
 }
 
 .card.G5 {
-  background-image: url('./assets/G5.png');
+  background-image: url("./assets/G5.png");
 }
 
 .card.G6 {
-  background-image: url('./assets/G6.png');
+  background-image: url("./assets/G6.png");
 }
 
 .card.G7 {
-  background-image: url('./assets/G7.png');
+  background-image: url("./assets/G7.png");
 }
 
 .card.G8 {
-  background-image: url('./assets/G8.png');
+  background-image: url("./assets/G8.png");
 }
 
 .card.G9 {
-  background-image: url('./assets/G9.png');
+  background-image: url("./assets/G9.png");
 }
 
 .card.G0 {
-  background-image: url('./assets/G0.png');
+  background-image: url("./assets/G0.png");
 }
 
 .card.B1 {
-  background-image: url('./assets/B1.png');
+  background-image: url("./assets/B1.png");
 }
 
 .card.B2 {
-  background-image: url('./assets/B2.png');
+  background-image: url("./assets/B2.png");
 }
 
 .card.B3 {
-  background-image: url('./assets/B3.png');
+  background-image: url("./assets/B3.png");
 }
 
 .card.B4 {
-  background-image: url('./assets/B4.png');
+  background-image: url("./assets/B4.png");
 }
 
 .card.B5 {
-  background-image: url('./assets/B5.png');
+  background-image: url("./assets/B5.png");
 }
 
 .card.B6 {
-  background-image: url('./assets/B6.png');
+  background-image: url("./assets/B6.png");
 }
 
 .card.B7 {
-  background-image: url('./assets/B7.png');
+  background-image: url("./assets/B7.png");
 }
 
 .card.B8 {
-  background-image: url('./assets/B8.png');
+  background-image: url("./assets/B8.png");
 }
 
 .card.B9 {
-  background-image: url('./assets/B9.png');
+  background-image: url("./assets/B9.png");
 }
 
 .card.B0 {
-  background-image: url('./assets/B0.png');
+  background-image: url("./assets/B0.png");
 }
 
 .card.Y1 {
-  background-image: url('./assets/Y1.png');
+  background-image: url("./assets/Y1.png");
 }
 
 .card.Y2 {
-  background-image: url('./assets/Y2.png');
+  background-image: url("./assets/Y2.png");
 }
 
 .card.Y3 {
-  background-image: url('./assets/Y3.png');
+  background-image: url("./assets/Y3.png");
 }
 
 .card.Y4 {
-  background-image: url('./assets/Y4.png');
+  background-image: url("./assets/Y4.png");
 }
 
 .card.Y5 {
-  background-image: url('./assets/Y5.png');
+  background-image: url("./assets/Y5.png");
 }
 
 .card.Y6 {
-  background-image: url('./assets/Y6.png');
+  background-image: url("./assets/Y6.png");
 }
 
 .card.Y7 {
-  background-image: url('./assets/Y7.png');
+  background-image: url("./assets/Y7.png");
 }
 
 .card.Y8 {
-  background-image: url('./assets/Y8.png');
+  background-image: url("./assets/Y8.png");
 }
 
 .card.Y9 {
-  background-image: url('./assets/Y9.png');
+  background-image: url("./assets/Y9.png");
 }
 
 .card.Y0 {
-  background-image: url('./assets/Y0.png');
+  background-image: url("./assets/Y0.png");
 }
 
 .card.BR {
-  background-image: url('./assets/B_reverse.png');
+  background-image: url("./assets/B_reverse.png");
 }
 
 .card.RR {
-  background-image: url('./assets/R_reverse.png');
-  
+  background-image: url("./assets/R_reverse.png");
 }
 
 .card.GR {
-  background-image: url('./assets/G_reverse.png');
-
-  
+  background-image: url("./assets/G_reverse.png");
 }
 
 .card.YR {
-  background-image: url('./assets/Y_reverse.png');
-  
+  background-image: url("./assets/Y_reverse.png");
 }
 
 .card.YS {
-  background-image: url('./assets/Y_skip.png');
-  
+  background-image: url("./assets/Y_skip.png");
 }
 
 .card.BS {
-  background-image: url('./assets/B_skip.png');
-  
+  background-image: url("./assets/B_skip.png");
 }
 
 .card.RS {
-  background-image: url('./assets/R_skip.png');
-  
+  background-image: url("./assets/R_skip.png");
 }
 
 .card.GS {
-  background-image: url('./assets/G_skip.png');
-  
+  background-image: url("./assets/G_skip.png");
 }
 
-.card.BW, .card.RW, .card.GW, .card.YW {
-  background-image: url('./assets/wild.png');
-  
+.card.BW,
+.card.RW,
+.card.GW,
+.card.YW {
+  background-image: url("./assets/wild.png");
 }
 
 .card.BD {
-  background-image: url('./assets/B+2.png');
-  
-
+  background-image: url("./assets/B+2.png");
 }
 
 .card.RD {
-  background-image: url('./assets/R+2.png');
-  
+  background-image: url("./assets/R+2.png");
 }
 
 .card.GD {
-  background-image: url('./assets/G+2.png');
-  
+  background-image: url("./assets/G+2.png");
 }
 
 .card.YD {
-  background-image: url('./assets/Y+2.png');
-  
+  background-image: url("./assets/Y+2.png");
 }
-
-
 
 /* Color-specific central styling with background images for special cards */
 .central.BW {
-  background-image: url('./assets/wild.png');
+  background-image: url("./assets/wild.png");
 }
 
 .central.RW {
-  background-image: url('./assets/wild.png');
+  background-image: url("./assets/wild.png");
 }
 
 .central.GW {
-  background-image: url('./assets/wild.png');
+  background-image: url("./assets/wild.png");
 }
 
 .central.YW {
-  background-image: url('./assets/wild.png');
+  background-image: url("./assets/wild.png");
 }
 
 .central.BD {
-  background-image: url('./assets/B+2.png');
+  background-image: url("./assets/B+2.png");
 }
 
 .central.RD {
-  background-image: url('./assets/R+2.png');
+  background-image: url("./assets/R+2.png");
 }
 
 .central.GD {
-  background-image: url('./assets/G+2.png');
+  background-image: url("./assets/G+2.png");
 }
 
 .central.YD {
-  background-image: url('./assets/Y+2.png');
+  background-image: url("./assets/Y+2.png");
 }
 /* Color-specific central styling with background images for number cards */
 .central.R1 {
-  background-image: url('./assets/R1.png');
+  background-image: url("./assets/R1.png");
 }
 
 .central.R2 {
-  background-image: url('./assets/R2.png');
+  background-image: url("./assets/R2.png");
 }
 
 .central.R3 {
-  background-image: url('./assets/R3.png');
+  background-image: url("./assets/R3.png");
 }
 
 .central.R4 {
-  background-image: url('./assets/R4.png');
+  background-image: url("./assets/R4.png");
 }
 
 .central.R5 {
-  background-image: url('./assets/R5.png');
+  background-image: url("./assets/R5.png");
 }
 
 .central.R6 {
-  background-image: url('./assets/R6.png');
+  background-image: url("./assets/R6.png");
 }
 
 .central.R7 {
-  background-image: url('./assets/R7.png');
+  background-image: url("./assets/R7.png");
 }
 
 .central.R8 {
-  background-image: url('./assets/R8.png');
+  background-image: url("./assets/R8.png");
 }
 
 .central.R9 {
-  background-image: url('./assets/R9.png');
+  background-image: url("./assets/R9.png");
 }
 
 .central.R0 {
-  background-image: url('./assets/R0.png');
+  background-image: url("./assets/R0.png");
 }
 
 .central.G1 {
-  background-image: url('./assets/G1.png');
+  background-image: url("./assets/G1.png");
 }
 
 .central.G2 {
-  background-image: url('./assets/G2.png');
+  background-image: url("./assets/G2.png");
 }
 
 .central.G3 {
-  background-image: url('./assets/G3.png');
+  background-image: url("./assets/G3.png");
 }
 
 .central.G4 {
-  background-image: url('./assets/G4.png');
+  background-image: url("./assets/G4.png");
 }
 
 .central.G5 {
-  background-image: url('./assets/G5.png');
+  background-image: url("./assets/G5.png");
 }
 
 .central.G6 {
-  background-image: url('./assets/G6.png');
+  background-image: url("./assets/G6.png");
 }
 
 .central.G7 {
-  background-image: url('./assets/G7.png');
+  background-image: url("./assets/G7.png");
 }
 
 .central.G8 {
-  background-image: url('./assets/G8.png');
+  background-image: url("./assets/G8.png");
 }
 
 .central.G9 {
-  background-image: url('./assets/G9.png');
+  background-image: url("./assets/G9.png");
 }
 
 .central.G0 {
-  background-image: url('./assets/G0.png');
+  background-image: url("./assets/G0.png");
 }
 
 .central.B1 {
-  background-image: url('./assets/B1.png');
+  background-image: url("./assets/B1.png");
 }
 
 .central.B2 {
-  background-image: url('./assets/B2.png');
+  background-image: url("./assets/B2.png");
 }
 
 .central.B3 {
-  background-image: url('./assets/B3.png');
+  background-image: url("./assets/B3.png");
 }
 
 .central.B4 {
-  background-image: url('./assets/B4.png');
+  background-image: url("./assets/B4.png");
 }
 
 .central.B5 {
-  background-image: url('./assets/B5.png');
+  background-image: url("./assets/B5.png");
 }
 
 .central.B6 {
-  background-image: url('./assets/B6.png');
+  background-image: url("./assets/B6.png");
 }
 
 .central.B7 {
-  background-image: url('./assets/B7.png');
+  background-image: url("./assets/B7.png");
 }
 
 .central.B8 {
-  background-image: url('./assets/B8.png');
+  background-image: url("./assets/B8.png");
 }
 
 .central.B9 {
-  background-image: url('./assets/B9.png');
+  background-image: url("./assets/B9.png");
 }
 
 .central.B0 {
-  background-image: url('./assets/B0.png');
+  background-image: url("./assets/B0.png");
 }
 
 .central.Y1 {
-  background-image: url('./assets/Y1.png');
+  background-image: url("./assets/Y1.png");
 }
 
 .central.Y2 {
-  background-image: url('./assets/Y2.png');
+  background-image: url("./assets/Y2.png");
 }
 
 .central.Y3 {
-  background-image: url('./assets/Y3.png');
+  background-image: url("./assets/Y3.png");
 }
 
 .central.Y4 {
-  background-image: url('./assets/Y4.png');
+  background-image: url("./assets/Y4.png");
 }
 
 .central.Y5 {
-  background-image: url('./assets/Y5.png');
+  background-image: url("./assets/Y5.png");
 }
 
 .central.Y6 {
-  background-image: url('./assets/Y6.png');
+  background-image: url("./assets/Y6.png");
 }
 
 .central.Y7 {
-  background-image: url('./assets/Y7.png');
+  background-image: url("./assets/Y7.png");
 }
 
 .central.Y8 {
-  background-image: url('./assets/Y8.png');
+  background-image: url("./assets/Y8.png");
 }
 
 .central.Y9 {
-  background-image: url('./assets/Y9.png');
+  background-image: url("./assets/Y9.png");
 }
 
 .central.Y0 {
-  background-image: url('./assets/Y0.png');
+  background-image: url("./assets/Y0.png");
 }
 
 /* Color-specific central styling with background images for special cards */
 .central.BR {
-  background-image: url('./assets/B_reverse.png');
+  background-image: url("./assets/B_reverse.png");
 }
 
 .central.RR {
-  background-image: url('./assets/R_reverse.png');
+  background-image: url("./assets/R_reverse.png");
 }
 
 .central.GR {
-  background-image: url('./assets/G_reverse.png');
+  background-image: url("./assets/G_reverse.png");
 }
 
 .central.YR {
-  background-image: url('./assets/Y_reverse.png');
+  background-image: url("./assets/Y_reverse.png");
 }
 
 .central.YS {
-  background-image: url('./assets/Y_skip.png');
+  background-image: url("./assets/Y_skip.png");
 }
 
 .central.BS {
-  background-image: url('./assets/B_skip.png');
+  background-image: url("./assets/B_skip.png");
 }
 
 .central.RS {
-  background-image: url('./assets/R_skip.png');
+  background-image: url("./assets/R_skip.png");
 }
 
 .central.GS {
-  background-image: url('./assets/G_skip.png');
+  background-image: url("./assets/G_skip.png");
 }
 
 .central.WD {
-  background-image: url('./assets/Wild.png');
+  background-image: url("./assets/Wild.png");
 }
-
-
 
 .card.R1,
 .card.R2,
@@ -662,8 +679,7 @@ button:hover {
 .central.BD,
 .central.RD,
 .central.GD,
-.central.YD
-{
+.central.YD {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
