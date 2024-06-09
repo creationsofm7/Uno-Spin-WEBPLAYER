@@ -4,7 +4,6 @@ import SpinWheel from "./components/SpinWheel";
 import { shuffleDeck, initialDeck } from "./gamelogic";
 import "./App.css";
 
-
 const App = () => {
   const [deck, setDeck] = useState([]);
   const [players, setPlayers] = useState([[], [], [], []]);
@@ -13,8 +12,12 @@ const App = () => {
   const [phase, setPhase] = useState("playing");
   const [direction, setDirection] = useState(1);
   const [chosenColor, setChosenColor] = useState(null);
-  const [screenState, setScreenState] = useState(["home", "playerjoin", "instructions", "game"]);
-  
+  const [screenState, setScreenState] = useState([
+    "home",
+    "playerjoin",
+    "instructions",
+    "game",
+  ]);
 
   useEffect(() => {
     startNewGame();
@@ -22,8 +25,7 @@ const App = () => {
 
   useEffect(() => {
     saveGameState();
-  }
-  , []);
+  }, []);
 
   const saveGameState = () => {
     const gameState = {
@@ -195,34 +197,48 @@ const App = () => {
       {screenState[0] === "home" && (
         <div className="container h-full">
           <div className="App flex flex-col">
-            <div className="container mx-auto  m-2">
-            
-              <div className="logo">
-                
-              </div>
-              
-              
+            <div className="container mx-auto m-2">
+              <div
+                className="logo"
+                style={{ animation: "spinGrow 1s ease-in-out forwards" }}
+              ></div>
             </div>
-            <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["playerjoin"])}>Start Game</button>
+            <button
+              className="m-2 text-red-500 text-2xl bangers-regular py-2 px-4 rounded"
+              onClick={() => setScreenState(["instructions"])}
+            >
+              Start Game
+            </button>
           </div>
         </div>
       )}
       {screenState[0] === "playerjoin" && (
-        <div className="container h-full">
-          <div className="App flex flex-col">
-            <div className="container mx-auto  m-2">
-              <h1>Player Join</h1>
-              <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["instructions"])}>Continue</button>
-            </div>
-          </div>
-        </div>
+        <PlayerJoin setScreenState={setScreenState} />
       )}
       {screenState[0] === "instructions" && (
         <div className="container h-full">
           <div className="App flex flex-col">
-            <div className="container mx-auto  m-2">
-              <h1>Instructions</h1>
-              <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["game"])}>Start Game</button>
+            <div className="inst-warp overflow-y-auto m-2">
+              <h1 className="m-2 text-red-500 text-4xl bangers-regular py-2 px-4 " >Instructions</h1>
+              <div className="image-grid">
+                <div className="image-item1" data-aos="fade-zoom-in">
+                  1
+                </div>
+                <div className="image-item2">
+                  2
+                </div>
+                <div className="image-item3">
+                  3
+                </div>
+                
+              </div>
+
+              <button
+                className="m-2 text-red-500 text-2xl bangers-regular py-2 px-4 rounded"
+                onClick={() => setScreenState(["playerjoin"])}
+              >
+                Start Game
+              </button>
             </div>
           </div>
         </div>
@@ -333,3 +349,82 @@ const PlayerHand = ({
     </>
   );
 };
+
+function PlayerJoin({ setScreenState }) {
+  const [playerName, setPlayerName] = useState("");
+  const [roomCode, setRoomCode] = useState("");
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isCreatingRoom, setIsCreatingRoom] = useState(false);
+
+  const handleInputChange = (event) => {
+    setPlayerName(event.target.value);
+  };
+
+  const handleRoomCodeChange = (event) => {
+    setRoomCode(event.target.value);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (playerName.trim() !== "" && roomCode.trim() !== "") {
+      setIsFormSubmitted(true);
+      setScreenState(["game"]);
+    }
+  };
+
+  const handleCreateRoom = () => {
+    setIsCreatingRoom(true);
+    // Generate a room code or handle room creation logic here
+    setRoomCode("ABCD1234"); // Example room code
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center p-4 App ">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+        {!isFormSubmitted ? (
+          <>
+            <h1 className="text-3xl font-bold mb-4">Player Join</h1>
+            <form onSubmit={handleFormSubmit} className="flex flex-col">
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={playerName}
+                onChange={handleInputChange}
+                className="mb-4 p-2 border rounded-lg text-lg"
+              />
+              {isCreatingRoom ? (
+                <div className="mb-4">
+                  <p className="text-lg mb-2">Room Code: {roomCode}</p>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  placeholder="Enter room code"
+                  value={roomCode}
+                  onChange={handleRoomCodeChange}
+                  className="mb-4 p-2 border rounded-lg text-lg"
+                />
+              )}
+              <button
+                type="submit"
+                className="mb-2 bg-red-500 text-white text-2xl py-2 px-4 rounded-lg"
+              >
+                Join Game
+              </button>
+            </form>
+            <button
+              onClick={handleCreateRoom}
+              className="bg-green-500 text-white text-2xl py-2 px-4 rounded-lg"
+            >
+              Create Room
+            </button>
+          </>
+        ) : (
+          <h2 className="text-2xl">
+            Welcome, {playerName}! Loading the game...
+          </h2>
+        )}
+      </div>
+    </div>
+  );
+}

@@ -46,6 +46,63 @@
   right: 0%;
 }
 
+.image-grid {
+  display: grid;
+ 
+  grid-template-rows: 4fr 4fr;
+  
+  
+  grid-gap: 10px;
+  margin: 4px ;
+
+
+}
+
+.image-item1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./assets/1.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 900px;
+  
+
+
+  
+
+
+}
+
+.image-item2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./assets/2.png');
+  border-radius: 5px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+
+}
+
+.image-item3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./assets/3.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 1350px;
+
+
+}
+
+
+
 .hidden-deck3 {
   background-image: url("./assets/card-group.png");
   background-size: contain;
@@ -78,6 +135,8 @@
   flex-direction: column;
 }
 
+
+
 .card {
   width: 112px;
   height: 150px;
@@ -92,7 +151,7 @@
 }
 
 .card:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .cards {
@@ -139,9 +198,8 @@ button {
   color: white;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
+
+
 
 /* Color-specific card styling */
 /* Color-specific card styling with background images for number cards */
