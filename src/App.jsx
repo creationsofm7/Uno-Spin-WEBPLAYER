@@ -374,8 +374,8 @@ function PlayerJoin({ setScreenState }) {
 
   const handleCreateRoom = () => {
     setIsCreatingRoom(true);
-    // Generate a room code or handle room creation logic here
-    setRoomCode("ABCD1234"); // Example room code
+    
+    setRoomCode("ASDQ532"); 
   };
 
   return (
