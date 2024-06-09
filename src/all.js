@@ -12,6 +12,7 @@ const App = () => {
   const [phase, setPhase] = useState("playing");
   const [direction, setDirection] = useState(1);
   const [chosenColor, setChosenColor] = useState(null);
+  
 
   useEffect(() => {
     startNewGame();
@@ -128,13 +129,6 @@ const App = () => {
       case "SP":
         setPhase("spinning");
         break;
-      case "1":
-      case "2":
-      case "3":
-      case "4":
-      case "5":
-        setPhase("spinning");
-        break;
       default:
         setCurrentPlayer((currentPlayer + direction + 4) % 4);
     }
@@ -183,36 +177,74 @@ const App = () => {
   };
 
   return (
-    <div className="container h-full">
+    <div className="container">
       <div className="App flex flex-col">
-        <div className="container mx-auto  m-2">
+        <div className="container mx-auto p-20 m-2">
           {phase !== "spinning" && (
             <>
+              <Deck deck={deck} />
               <div className="current-card">
-                <div className={`central ${currentCard}`}></div>
+                <h2 className="text-2xl font-bold">Current Card</h2>
+                <div className={`central ${currentCard}`}>{currentCard}</div>
               </div>
-              {/* <h2 className="text-xl font-bold mb-2">Current Active Player</h2>
+              <h2 className="text-xl font-bold mb-2">Current Active Player</h2>
               <div className="text-3xl font-bold active-player">
                 {currentPlayer + 1}
-              </div> */}
+              </div>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={endTurn}
+              >
+                End Turn
+              </button>
+              <button
+                className="bg-black ml-2 hover:bg-gray-200 text-blue-500 font-bold py-2 px-4 rounded"
+                onClick={startNewGame}
+              >
+                Start New Game
+              </button>
             </>
           )}
           {phase === "spinning" ? (
             <SpinWheel onSpinResult={handleSpinResult} />
           ) : (
             <div className="players">
-              {players.map((playerCards, index) =>
-                index === currentPlayer ? (
-                  <PlayerHand
-                    key={index}
-                    playerIndex={index}
-                    cards={playerCards}
-                    currentPlayer={currentPlayer}
-                    drawCard={() => drawCard(index)}
-                    playCard={(cardIndex) => playCard(index, cardIndex)}
-                  />
-                ) : null
-              )}
+              <div className="absolute inset-x-0 top-0 flex items-center justify-center">
+                <PlayerHand
+                  playerIndex={0}
+                  cards={players[0]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(0)}
+                  playCard={(cardIndex) => playCard(0, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 flex justify-center">
+                <PlayerHand
+                  playerIndex={1}
+                  cards={players[1]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(1)}
+                  playCard={(cardIndex) => playCard(1, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-y-0 left-0 flex items-center justify-center transform rotate-90">
+                <PlayerHand
+                  playerIndex={2}
+                  cards={players[2]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(2)}
+                  playCard={(cardIndex) => playCard(2, cardIndex)}
+                />
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center justify-center transform -rotate-90">
+                <PlayerHand
+                  playerIndex={3}
+                  cards={players[3]}
+                  currentPlayer={currentPlayer}
+                  drawCard={() => drawCard(3)}
+                  playCard={(cardIndex) => playCard(3, cardIndex)}
+                />
+              </div>
             </div>
           )}
         </div>
@@ -241,7 +273,9 @@ const PlayerHand = ({
             key={index}
             className={`card ${card}`}
             onClick={() => playCard(index)}
-          ></div>
+          >
+            {card}
+          </div>
         ))}
       </div>
       {currentPlayer === playerIndex && (
@@ -250,3 +284,104 @@ const PlayerHand = ({
     </div>
   );
 };
+
+
+
+const Deck = ({ deck }) => {
+  return (
+    <div className="deck">
+      <h2>Deck</h2>
+      <div>{deck.length} cards remaining</div>
+    </div>
+  );
+};
+
+
+
+
+const SpinWheel = ({ onSpinResult }) => {
+  const [spinning, setSpinning] = useState(false);
+  const [spinResult, setSpinResult] = useState(null);
+
+  const spinOptions = [
+    'Draw 2 Cards',
+    'Skip Turn',
+    'Reverse',
+    'Swap Hands',
+    'Play Again',
+    'Wild Card'
+  ];
+
+  const spin = () => {
+    setSpinning(true);
+    const result = spinOptions[Math.floor(Math.random() * spinOptions.length)];
+    setTimeout(() => {
+      setSpinning(false);
+      setSpinResult(result);
+    }, 2000); // 2 seconds spinning time
+  };
+
+  const confirmResult = () => {
+    onSpinResult(spinResult);
+    setSpinResult(null);
+  };
+
+  return (
+    <div className="flex flex-col items-center">
+      <h2 className="text-2xl mb-4">Spin the Wheel</h2>
+      <div className="relative w-60 h-60 border-4 border-gray-800 rounded-full flex items-center justify-center">
+        <div
+          className={`absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400 to-red-400 rounded-full transform transition-transform ${
+            spinning ? 'animate-spin' : ''
+          }`}
+          style={{ animationDuration: '2s' }}
+        />
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+          <span className="text-white font-bold text-xl">
+            {spinning ? 'Spinning...' : 'Spin'}
+          </span>
+        </div>
+      </div>
+      {!spinning && (
+        <button
+          onClick={spin}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        >
+          Spin
+        </button>
+      )}
+      {spinResult && !spinning && (
+        <div className="mt-4 text-center">
+          <p className="text-xl">Result: {spinResult}</p>
+          <button
+            onClick={confirmResult}
+            className="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+          >
+            Confirm
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+
+
+export const initialDeck = [
+    'R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'R9', 'R0', 'RS', 'RD', 'RW', 'RSP',
+    'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G0', 'GS', 'GD', 'GW', 'GSP',
+    'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B0', 'BS', 'BD', 'BW', 'BSP',
+    'Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y6', 'Y7', 'Y8', 'Y9', 'Y0', 'YS', 'YD', 'YW', 'YSP'
+  ];
+  
+  
+  export const shuffleDeck = (deck) => {
+    let shuffledDeck = [...deck];
+    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j], shuffledDeck[i]];
+    }
+    return shuffledDeck;
+  };
+  
