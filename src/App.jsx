@@ -4,6 +4,7 @@ import SpinWheel from "./components/SpinWheel";
 import { shuffleDeck, initialDeck } from "./gamelogic";
 import "./App.css";
 
+
 const App = () => {
   const [deck, setDeck] = useState([]);
   const [players, setPlayers] = useState([[], [], [], []]);
@@ -12,10 +13,17 @@ const App = () => {
   const [phase, setPhase] = useState("playing");
   const [direction, setDirection] = useState(1);
   const [chosenColor, setChosenColor] = useState(null);
+  const [screenState, setScreenState] = useState(["home", "playerjoin", "instructions", "game"]);
+  
 
   useEffect(() => {
     startNewGame();
   }, []);
+
+  useEffect(() => {
+    saveGameState();
+  }
+  , []);
 
   const saveGameState = () => {
     const gameState = {
@@ -183,64 +191,105 @@ const App = () => {
   };
 
   return (
-    <div className="container h-full">
-      <div className="App flex flex-col">
-        <div className="container mx-auto  m-2">
-          {phase !== "spinning" && (
-            <>
-              <div className="current-card flex">
-                
-                <div className={`central ${currentCard}`}>
-                  
-                </div>
-                <button
-                  className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={startNewGame}
-                >
-                  New Game
-                </button>
-                <button className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={endTurn} >
-                  End Turn
-                </button>
+    <>
+      {screenState[0] === "home" && (
+        <div className="container h-full">
+          <div className="App flex flex-col">
+            <div className="container mx-auto  m-2">
+            
+              <div className="logo">
                 
               </div>
-            </>
-          )}
+              
+              
+            </div>
+            <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["playerjoin"])}>Start Game</button>
+          </div>
+        </div>
+      )}
+      {screenState[0] === "playerjoin" && (
+        <div className="container h-full">
+          <div className="App flex flex-col">
+            <div className="container mx-auto  m-2">
+              <h1>Player Join</h1>
+              <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["instructions"])}>Continue</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {screenState[0] === "instructions" && (
+        <div className="container h-full">
+          <div className="App flex flex-col">
+            <div className="container mx-auto  m-2">
+              <h1>Instructions</h1>
+              <button className="m-2  text-red-500 text-2xl  bangers-regular py-2 px-4 rounded" onClick={() => setScreenState(["game"])}>Start Game</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {screenState[0] === "game" && (
+        <div className="container h-full">
+          <div className="App flex flex-col">
+            <div className="container mx-auto  m-2">
+              {phase !== "spinning" && (
+                <>
+                  <div className="current-card flex">
+                    <div className={`central ${currentCard}`}></div>
+                    <button
+                      className="m-2  text-red-500 hover:bg-black text-2xl  bangers-regular py-2 px-4 rounded"
+                      onClick={startNewGame}
+                    >
+                      New Game
+                    </button>
+                    <button
+                      className="m-2  text-red-500 hover:bg-black text-2xl  bangers-regular  py-2 px-4 rounded"
+                      onClick={endTurn}
+                    >
+                      End Turn
+                    </button>
+                    <button className="instructions hover:bg-black  text-red-500 text-2xl  bangers-regular  py-2 px-4 rounded">
+                      ?
+                    </button>
+                  </div>
+                </>
+              )}
 
-          {phase === "spinning" ? (
-            <SpinWheel onSpinResult={handleSpinResult} />
-          ) : (
-            <div className="players">
-              {players.map((playerCards, index) =>
-                index === currentPlayer ? (
-                  <PlayerHand
-                    key={index}
-                    playerIndex={index}
-                    cards={playerCards}
-                    currentPlayer={currentPlayer}
-                    drawCard={() => drawCard(index)}
-                    playCard={(cardIndex) => playCard(index, cardIndex)}
-                  />
-                ) : null
+              {phase === "spinning" ? (
+                <SpinWheel onSpinResult={handleSpinResult} />
+              ) : (
+                <div className="players">
+                  {players.map((playerCards, index) =>
+                    index === currentPlayer ? (
+                      <PlayerHand
+                        key={index}
+                        playerIndex={index}
+                        cards={playerCards}
+                        currentPlayer={currentPlayer}
+                        drawCard={() => drawCard(index)}
+                        playCard={(cardIndex) => playCard(index, cardIndex)}
+                      />
+                    ) : null
+                  )}
+                </div>
+              )}
+              {phase !== "spinning" && (
+                <>
+                  <div className="hidden-deck3">
+                    <h1></h1>
+                  </div>
+                  <div className="hidden-deck2">
+                    <h1></h1>
+                  </div>
+                  <div className="hidden-deck1">
+                    <h1></h1>
+                  </div>
+                </>
               )}
             </div>
-          )}
-          {phase !== "spinning" && (
-            <>
-              <div className="hidden-deck3">
-                <h1></h1>
-              </div>
-              <div className="hidden-deck2">
-                <h1></h1>
-              </div>
-              <div className="hidden-deck1">
-                <h1></h1>
-              </div>
-            </>
-          )}
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
@@ -260,7 +309,9 @@ const PlayerHand = ({
           currentPlayer === playerIndex ? "active" : ""
         } absolute inset-x-0 bottom-0 `}
       >
-        <h3>Player {playerIndex + 1}</h3>
+        <h3 className=" text-white text-2xl  bangers-regular ">
+          Player {playerIndex + 1}
+        </h3>
         <div className="cards ">
           {cards.map((card, index) => (
             <div
@@ -271,7 +322,12 @@ const PlayerHand = ({
           ))}
         </div>
         {currentPlayer === playerIndex && (
-          <button onClick={drawCard}>Draw Card</button>
+          <button
+            className=" text-red-500 text-2xl  bangers-regular "
+            onClick={drawCard}
+          >
+            Draw Card
+          </button>
         )}
       </div>
     </>
